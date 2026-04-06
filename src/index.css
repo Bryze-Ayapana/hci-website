@@ -1,6 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
+
+@theme {
+  /* Philippine Flag Palette */
+  --color-ph-blue: #0038A8;
+  --color-ph-red: #CE1126;
+  --color-ph-yellow: #FCD116;
+}
+
 :root {
+  font-family: 'Poppins', sans-serif;
   --text: #6b6375;
   --text-h: #08060d;
   --bg: #fff;
@@ -57,15 +67,18 @@ body {
 }
 
 #root {
-  width: 1126px;
+  width: 100%; 
   max-width: 100%;
-  margin: 0 auto;
-  text-align: center;
-  border-inline: 1px solid var(--border);
+  margin: 0;
+  
+  /* Keep these for layout structure */
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
+
+  text-align: left; 
+  border-inline: none;
 }
 
 h1,
@@ -110,4 +123,14 @@ code {
   line-height: 135%;
   padding: 4px 8px;
   background: var(--code-bg);
+}
+
+* {
+  cursor: none !important;
+  /* Prevents the cursor from changing to a text-selector 'I' beam */
+  user-select: none; 
+}
+
+a, button, input {
+  pointer-events: auto;
 }
