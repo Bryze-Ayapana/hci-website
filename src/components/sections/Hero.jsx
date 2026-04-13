@@ -3,27 +3,38 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [currentWord, setCurrentWord] = useState(0);
   
-  // Binago natin lahat into .jpg
   const images = [
-    '/headerPicture1.jpg',
-    '/headerPicture2.jpg',
-    '/headerPicture3.jpg',
+    '/headerPicture1.png',
+    '/headerPicture2.png',
+    '/headerPicture3.png',
     '/headerPicture4.png',
-    '/headerPicture5.jpg',
+    '/headerPicture5.png',
+    '/headerPicture6.png',
+    '/headerPicture7.png',
+    '/headerPicture8.png',
   ];
 
+  const cyclingWords = ['HOME', 'PRIDE', 'LEGACY'];
+
   useEffect(() => {
-    // 10000ms = eksaktong 10 seconds bawat picture
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % images.length);
     }, 10000); 
-
     return () => clearInterval(timer);
   }, [images.length]);
 
+  useEffect(() => {
+    const wordTimer = setInterval(() => {
+      setCurrentWord((prev) => (prev + 1) % cyclingWords.length);
+    }, 3000);
+    return () => clearInterval(wordTimer);
+  }, [cyclingWords.length]);
+
   return (
-<section className="relative h-screen w-full overflow-hidden bg-[#030A17] pt-32">      <div className="absolute inset-0 z-0">
+    <section className="relative h-screen w-full overflow-hidden bg-white dark:bg-[#030A17] pt-32 transition-colors duration-300"> 
+      <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
           <motion.img
             key={currentIndex}
@@ -31,7 +42,6 @@ const Hero = () => {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            // 1.5s transition para dahan-dahan ang pag-fade
             transition={{ duration: 1.5, ease: "linear" }}
             className="w-full h-full object-cover object-center absolute inset-0"
             alt="PSC Hero Background"
@@ -39,39 +49,54 @@ const Hero = () => {
         </AnimatePresence>
       </div>
 
-      {/* Dark Overlays para sa DOST-SEI look */}
-      <div className="absolute inset-0 bg-[#030A17]/60 z-10 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#030A17] via-transparent to-transparent z-10 pointer-events-none" />
+      {/* ── LIGHT AND DARK MODE LOCALIZED OVERLAYS ── */}
+      
+      {/* Left side overlay: ~800px width, white gradient to transparent (light mode only) */}
+      <div className="absolute left-0 top-0 h-full w-[500px] bg-gradient-to-r from-white/50 dark:from-[#030A17]/50 via-white/20 dark:via-[#030A17]/20 to-transparent z-10 pointer-events-none transition-colors duration-300" />
+      
+      {/* Bottom overlay: ~166px height, white gradient to transparent (light mode only) */}
+      <div className="absolute bottom-0 left-0 w-full h-[166px] bg-gradient-to-t from-white/20 dark:from-[#030A17]/70 via-white/30 dark:via-[#030A17]/40 to-transparent z-10 pointer-events-none transition-colors duration-300" />
 
       {/* Hero Text Content */}
-      <div className="relative h-full w-full flex items-center z-20 px-4 md:px-20 lg:px-32">
-        <div className="max-w-7xl w-full"> {/* Increased max-width to allow the full line */}
-            <p className="text-white text-xs md:text-sm font-normal uppercase tracking-[0.15em] mb-0">
-                Welcome to the
-            </p>
+      <div className="relative h-full w-full z-20 px-4 md:px-20 lg:px-32 flex flex-col items-start justify-end pb-24">
+        {/* Changed to flex-col to naturally stack the elements without colliding */}
+        <div className="max-w-7xl w-full flex flex-col">
+          
+          <p className="text-white text-xs md:text-sm font-bold uppercase tracking-[0.15em] m-0 p-0 drop-shadow-lg relative translate-y-3 md:translate-y-4 z-10">
+            Welcome to the
+          </p>
 
-            {/* Main Slogan: whitespace-nowrap keeps it on 1 line */}
-            <h1 className="text-3xl md:text-5xl lg:text-6xl uppercase tracking-tighter whitespace-nowrap leading-none">
-                {/* "The Home of" is Regular (font-normal) */}
-                <span className="text-white font-normal">The Home of </span>
-                
-                {/* "Every Filipino Athlete" is Bold (font-bold) with Gradient */}
-                <span className="font-bold bg-gradient-to-r from-ph-yellow via-white to-ph-blue bg-clip-text text-transparent italic">
-                Every Filipino Athlete
-                </span>
-            </h1>
-
-            {/* Sub-text: font-normal for "Regular" look */}
-            <div className="mt-3 flex items-center gap-2 text-white/80 text-xs md:text-lg font-normal tracking-tight">
-                <span className="w-10 h-[1px] bg-ph-red" />
-                <p>Pusong Pinoy. Lakas ng Atletang Pilipino.</p>
+          <h1 className="text-4xl md:text-6xl lg:text-7xl uppercase tracking-tight leading-[0.9] m-0 p-0 font-bold drop-shadow-2xl relative z-0">
+            <div className="text-white font-bold leading-none m-0 p-0 flex items-center">
+              The&nbsp;
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={currentWord}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: "easeInOut" }}
+                  className="inline-block font-bold bg-gradient-to-r from-[#fbd11e] to-[#fdff8d] bg-clip-text text-transparent drop-shadow-2xl"
+                >
+                  {cyclingWords[currentWord]}
+                </motion.span>
+              </AnimatePresence>
+              &nbsp;of Every
             </div>
-
-            <button className="mt-8 px-10 py-3 bg-ph-blue hover:bg-blue-800 text-white font-bold text-xs uppercase tracking-widest transition-all shadow-lg">
-                Learn More
-            </button>
+            <div className="text-white font-bold leading-none m-0 p-0">
+              Filipino Athlete
             </div>
+          </h1>
+
+          {/* CHANGED: Replaced mt-3 with a negative translation to pull it up tightly under the heading */}
+          <div className="m-0 p-0 text-white text-xs md:text-sm font-normal tracking-tight drop-shadow-lg relative -translate-y-2 md:-translate-y-3 z-10">
+            <p className="m-0">Pusong Pinoy. Lakas ng Atletang Pilipino.</p>
+          </div>
+        </div>
       </div>
+
+      {/* Smooth blend gradient to next section */}
+      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-b from-transparent via-white/20 dark:via-gray-900/50 to-gray-50 dark:to-gray-900 z-20 pointer-events-none transition-colors duration-300" />
     </section>
   );
 };

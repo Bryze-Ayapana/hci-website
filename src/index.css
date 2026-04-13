@@ -1,9 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700;900&display=swap');
 @import "tailwindcss";
 
+/* =====================================================
+   CRITICAL FIX FOR TAILWIND V4:
+   ===================================================== */
+@variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Philippine Flag Palette */
   --color-ph-blue: #0038A8;
   --color-ph-red: #CE1126;
   --color-ph-yellow: #FCD116;
@@ -11,27 +14,15 @@
 
 :root {
   font-family: 'Poppins', sans-serif;
-  --text: #6b6375;
-  --text-h: #08060d;
-  --bg: #fff;
-  --border: #e5e4e7;
-  --code-bg: #f4f3ec;
-  --accent: #aa3bff;
-  --accent-bg: rgba(170, 59, 255, 0.1);
-  --accent-border: rgba(170, 59, 255, 0.5);
-  --social-bg: rgba(244, 243, 236, 0.5);
-  --shadow:
-    rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
-
-  --sans: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --heading: system-ui, 'Segoe UI', Roboto, sans-serif;
-  --mono: ui-monospace, Consolas, monospace;
-
-  font: 18px/145% var(--sans);
+  /* ── GLOBAL ZOOM ── */
+  /* Using zoom: 0.9 makes everything 10% smaller while maintaining fixed positions */
+  zoom: 0.9; 
+  height: 100%;
+  width: 100%;
+  
+  font: 18px/145% 'Poppins', sans-serif;
   letter-spacing: 0.18px;
-  color-scheme: light dark;
-  color: var(--text);
-  background: var(--bg);
+  color-scheme: light;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -39,53 +30,58 @@
 
   @media (max-width: 1024px) {
     font-size: 16px;
+    zoom: 1; /* Reset zoom on smaller tablets/mobile to ensure readability */
   }
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --text: #9ca3af;
-    --text-h: #f3f4f6;
-    --bg: #16171d;
-    --border: #2e303a;
-    --code-bg: #1f2028;
-    --accent: #c084fc;
-    --accent-bg: rgba(192, 132, 252, 0.15);
-    --accent-border: rgba(192, 132, 252, 0.5);
-    --social-bg: rgba(47, 48, 58, 0.5);
-    --shadow:
-      rgba(0, 0, 0, 0.4) 0 10px 15px -3px, rgba(0, 0, 0, 0.25) 0 4px 6px -2px;
+/* Firefox Fallback for Zoom */
+@-moz-document url-prefix() {
+  html {
+    transform: scale(0.9);
+    transform-origin: top center;
+    width: 111.11%; /* Compensate for the scale down to prevent right-side gap */
+    margin-left: -5.55%;
   }
+}
 
-  #social .button-icon {
-    filter: invert(1) brightness(2);
-  }
+/* Switch browser UI to dark when .dark is active */
+.dark {
+  color-scheme: dark;
 }
 
 body {
   margin: 0;
+  font-family: 'Poppins', sans-serif;
+  @apply text-gray-900 bg-white transition-colors duration-300;
+
+  width: 100%; 
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  
+}
+
+.dark body {
+  @apply text-white bg-[#030A17];
 }
 
 #root {
-  width: 100%; 
+  width: 100%;
   max-width: 100%;
   margin: 0;
-  
-  /* Keep these for layout structure */
   min-height: 100svh;
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-
-  text-align: left; 
+  text-align: left;
   border-inline: none;
 }
 
-h1,
-h2 {
-  font-family: var(--heading);
+/* ... keep h1, h2, p, and code styles as they were ... */
+
+h1, h2 {
+  font-family: 'Poppins', system-ui, sans-serif;
   font-weight: 500;
-  color: var(--text-h);
 }
 
 h1 {
@@ -97,6 +93,7 @@ h1 {
     margin: 20px 0;
   }
 }
+
 h2 {
   font-size: 24px;
   line-height: 118%;
@@ -106,31 +103,35 @@ h2 {
     font-size: 20px;
   }
 }
-p {
-  margin: 0;
-}
 
-code,
-.counter {
-  font-family: var(--mono);
-  display: inline-flex;
-  border-radius: 4px;
-  color: var(--text-h);
-}
+p { margin: 0; }
 
 code {
+  font-family: ui-monospace, Consolas, monospace;
   font-size: 15px;
   line-height: 135%;
   padding: 4px 8px;
-  background: var(--code-bg);
+  display: inline-flex;
+  border-radius: 4px;
 }
 
+/* ── INTERACTIVE ELEMENTS ── */
 * {
+  /* Your custom cursor logic remains here */
   cursor: none !important;
-  /* Prevents the cursor from changing to a text-selector 'I' beam */
-  user-select: none; 
+  user-select: none;
 }
 
 a, button, input {
   pointer-events: auto;
+}
+
+.custom-scrollbar::-webkit-scrollbar { width: 4px; }
+.custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #d1d5db;
+  border-radius: 999px;
+}
+.dark .custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
 }

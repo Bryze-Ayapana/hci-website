@@ -1,19 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function useDarkMode() {
-  // Check local storage for saved preference, default to light
-  const [theme, setTheme] = useState(localStorage.theme || 'light');
-  const colorTheme = theme === 'dark' ? 'light' : 'dark';
+  const [theme, setTheme] = useState(() => {
+    // Check localStorage first; if nothing saved yet, default to 'light'
+    return localStorage.getItem('theme') || 'light';
+  });
 
   useEffect(() => {
     const root = window.document.documentElement;
-    // Remove the old theme class and add the new one to the <html> tag
-    root.classList.remove(colorTheme);
-    root.classList.add(theme);
-    
-    // Save to local storage so it remembers on refresh
+    if (theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
+    }
+    // Remember the user's choice across refreshes
     localStorage.setItem('theme', theme);
-  }, [theme, colorTheme]);
+  }, [theme]);
 
-  return [colorTheme, setTheme];
+  const toggleTheme = () => {
+    setTheme(prev => (prev === 'light' ? 'dark' : 'light'));
+  };
+
+  return [theme, toggleTheme];
 }

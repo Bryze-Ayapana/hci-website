@@ -9,12 +9,20 @@ const CustomCursor = () => {
   const circleX = useSpring(0, springConfig);
   const circleY = useSpring(0, springConfig);
 
+  // Define your zoom factor here (must match the zoom in your index.css)
+  const ZOOM_FACTOR = 0.9;
+
   useEffect(() => {
     const mouseMove = (e) => {
       const { clientX, clientY } = e;
-      setMousePosition({ x: clientX, y: clientY });
-      circleX.set(clientX - 16); // Offset for 32px wide circle
-      circleY.set(clientY - 16);
+      
+      // Divide by the zoom factor to push the cursor all the way to the true edges
+      const adjustedX = clientX / ZOOM_FACTOR;
+      const adjustedY = clientY / ZOOM_FACTOR;
+
+      setMousePosition({ x: adjustedX, y: adjustedY });
+      circleX.set(adjustedX - 16); // Offset for 32px wide circle
+      circleY.set(adjustedY - 16);
     };
     
     window.addEventListener("mousemove", mouseMove);

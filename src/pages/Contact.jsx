@@ -3,11 +3,11 @@ import { FiFacebook, FiInstagram, FiYoutube } from 'react-icons/fi';
 import { BsTwitterX } from 'react-icons/bs';
 
 const Contact = () => {
-  // Structured Directory Data
   const agencyDirectories = [
     {
       title: "Commission Proper",
-      accent: "border-ph-blue", // Blue accent
+      accent: "border-ph-blue",
+      titleColor: "text-ph-blue dark:text-ph-yellow",
       data: [
         { name: "JOHN PATRICK C. GREGORIO", role: "Chairman", office: "Office of the Chairman", local: "168/888/148/158", email: "officeofthechairman@psc.gov.ph" },
         { name: "OLIVIA G. COO", role: "Commissioner", office: 'Office of Commissioner Olivia "Bong" G. Coo', local: "157", email: "ofc.commbc@psc.gov.ph" },
@@ -22,7 +22,8 @@ const Contact = () => {
     },
     {
       title: "Bureau on Coordinating Secretariat and Support Services",
-      accent: "border-ph-yellow", // Yellow accent
+      accent: "border-ph-yellow",
+      titleColor: "text-yellow-600 dark:text-ph-yellow",
       data: [
         { name: "ANNA CHRISTINE S. ABELLANA", role: "Officer-In-Charge", office: "Office of the Deputy Executive Director - Bureau on Coordinating Secretariat and Support Services", local: "194", email: "bcsss@psc.gov.ph" },
         { name: "ANNA M. RUIZ", role: "Officer-In-Charge", office: "Assistance Coordination Division", local: "138/156", email: "supportservices@psc.gov.ph" },
@@ -40,7 +41,8 @@ const Contact = () => {
     },
     {
       title: "Bureau on Administrative, Financial and Management Services",
-      accent: "border-ph-red", // Red accent
+      accent: "border-ph-red",
+      titleColor: "text-ph-red dark:text-red-400",
       data: [
         { name: "DIR. MERLITA R. IBAY", role: "Deputy Executive Director", office: "Office of the Deputy Executive Director - Bureau on Administrative, Financial and Management Services", local: "145/178", email: "dedfas@psc.gov.ph" },
         { name: "DR. CHRISTOPHER B. GACUTAN", role: "Chief", office: "Management Services Division", local: "147/153", email: "admin@psc.gov.ph" },
@@ -59,67 +61,72 @@ const Contact = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-[#030A17] pt-32 px-6 md:px-12 lg:px-24 pb-20 font-poppins text-white">
-      
-      {/* TOP SECTION: Details & Map */}
+    /* PAGE BACKGROUND */
+    <div className="min-h-screen bg-white dark:bg-transparent pt-32 px-6 md:px-12 lg:px-24 pb-20 font-poppins transition-colors duration-300">
+
+      {/* TOP SECTION */}
       <div className="flex flex-col lg:flex-row gap-12 mb-20">
-        
-        {/* Left Column: Contact Details */}
+
+        {/* Left: Contact Details */}
         <div className="w-full lg:w-1/3 space-y-8 mt-2">
-          
           <div>
-            <h3 className="text-[11px] font-bold text-gray-500 mb-2 uppercase tracking-widest">Address:</h3>
-            <p className="text-sm font-medium leading-relaxed text-gray-200">
+            <h3 className="text-[11px] font-bold text-gray-400 mb-2 uppercase tracking-widest">Address:</h3>
+            <p className="text-sm font-medium leading-relaxed text-gray-700 dark:text-gray-300">
               Rizal Memorial Sports Complex<br />
               Pablo Ocampo Sr., St. Malate Manila
             </p>
           </div>
-
           <div>
-            <h3 className="text-[11px] font-bold text-gray-500 mb-2 uppercase tracking-widest">Trunklines:</h3>
-            <p className="text-sm font-medium leading-relaxed text-gray-200">
+            <h3 className="text-[11px] font-bold text-gray-400 mb-2 uppercase tracking-widest">Trunklines:</h3>
+            <p className="text-sm font-medium leading-relaxed text-gray-700 dark:text-gray-300">
               8525-0808 / 8524-4408 / 8523-6055 /<br />
               8525-2075 / 8521-2364 / 8523-9831 /<br />
               8400-1864
             </p>
           </div>
-
           <div>
-            <h3 className="text-[11px] font-bold text-gray-500 mb-2 uppercase tracking-widest">Website:</h3>
-            <a href="https://www.psc.gov.ph" target="_blank" rel="noopener noreferrer" className="text-sm font-medium text-gray-200 hover:text-ph-yellow transition-colors">
+            <h3 className="text-[11px] font-bold text-gray-400 mb-2 uppercase tracking-widest">Website:</h3>
+            <a
+              href="https://www.psc.gov.ph"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-sm font-medium text-ph-blue dark:text-gray-300 hover:text-ph-red transition-colors"
+            >
               www.psc.gov.ph
             </a>
           </div>
-
           <div>
-            <h3 className="text-[11px] font-bold text-gray-500 mb-4 uppercase tracking-widest">Socials:</h3>
+            <h3 className="text-[11px] font-bold text-gray-400 mb-4 uppercase tracking-widest">Socials:</h3>
             <div className="flex gap-5">
-              <a href="https://www.facebook.com/psc.gov.ph?_rdc=1&_rdr#" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all hover:scale-110">
+              <a href="https://www.facebook.com/psc.gov.ph" target="_blank" rel="noopener noreferrer"
+                className="text-gray-400 hover:text-ph-blue dark:hover:text-white transition-all hover:scale-110">
                 <FiFacebook size={22} />
               </a>
-              <a href="https://www.instagram.com/phil.sportscommission/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all hover:scale-110">
+              <a href="https://www.instagram.com/phil.sportscommission/" target="_blank" rel="noopener noreferrer"
+                className="text-gray-400 hover:text-ph-red dark:hover:text-white transition-all hover:scale-110">
                 <FiInstagram size={22} />
               </a>
-              <a href="https://x.com/psc_gov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all hover:scale-110">
+              <a href="https://x.com/psc_gov" target="_blank" rel="noopener noreferrer"
+                className="text-gray-400 hover:text-gray-900 dark:hover:text-white transition-all hover:scale-110">
                 <BsTwitterX size={20} />
               </a>
-              <a href="https://www.youtube.com/@psc_gov" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-white transition-all hover:scale-110">
+              <a href="https://www.youtube.com/@psc_gov" target="_blank" rel="noopener noreferrer"
+                className="text-gray-400 hover:text-ph-red dark:hover:text-white transition-all hover:scale-110">
                 <FiYoutube size={24} />
               </a>
             </div>
           </div>
-
         </div>
 
-        {/* Right Column: Google Map */}
-        <div className="w-full lg:w-2/3 h-[350px] md:h-[450px] rounded-[24px] overflow-hidden border border-white/10 shadow-2xl relative bg-white/5">
-          <iframe 
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.564177409419!2d120.99042501533618!3d14.56687008182963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c97825d143c1%3A0xc3cf2ce674f14125!2sRizal%20Memorial%20Sports%20Complex!5e0!3m2!1sen!2sph!4v1680000000000!5m2!1sen!2sph" 
-            width="100%" 
-            height="100%" 
-            style={{ border: 0 }} 
-            allowFullScreen="" 
-            loading="lazy" 
+        {/* Right: Google Map */}
+        <div className="w-full lg:w-2/3 h-[350px] md:h-[450px] rounded-[24px] overflow-hidden border border-gray-200 dark:border-white/10 shadow-lg relative">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3861.564177409419!2d120.99042501533618!3d14.56687008182963!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3397c97825d143c1%3A0xc3cf2ce674f14125!2sRizal%20Memorial%20Sports%20Complex!5e0!3m2!1sen!2sph!4v1680000000000!5m2!1sen!2sph"
+            width="100%"
+            height="100%"
+            style={{ border: 0 }}
+            allowFullScreen=""
+            loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             title="PSC Location Map"
             className="absolute inset-0 z-10"
@@ -127,42 +134,45 @@ const Contact = () => {
         </div>
       </div>
 
-      {/* BOTTOM SECTION: Agency Directory Tables */}
+      {/* Directory Tables */}
       <div className="w-full">
-        
-        <div className="mb-8 border-b border-white/10 pb-6">
-          <h2 className="text-2xl md:text-4xl font-bold tracking-tight">Agency Local Directory</h2>
+        <div className="mb-8 border-b border-gray-200 dark:border-white/10 pb-6">
+          <h2 className="text-2xl md:text-4xl font-bold tracking-tight text-gray-900 dark:text-white">
+            Agency Local Directory
+          </h2>
         </div>
 
-        {/* Map through the directories array to generate the 3 tables */}
         <div className="space-y-12">
           {agencyDirectories.map((directory, index) => (
-            <div key={index} className="w-full">
-              {/* Bureau Header */}
-              <h3 className="text-lg font-bold text-gray-200 mb-4 tracking-tight">{directory.title}</h3>
-              
-              {/* The Table Container */}
-              <div className={`bg-white/5 border border-white/10 border-t-2 ${directory.accent} rounded-[16px] overflow-x-auto shadow-lg`}>
+            <div key={index}>
+              <h3 className={`text-lg font-bold mb-4 tracking-tight ${directory.titleColor}`}>
+                {directory.title}
+              </h3>
+
+              {/* TABLE CARD */}
+              <div className={`bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 border-t-2 ${directory.accent} rounded-[16px] overflow-x-auto shadow-sm`}>
                 <table className="w-full text-left border-collapse min-w-[800px]">
                   <thead>
-                    <tr>
-                      <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10 w-1/4">Head / Chief</th>
-                      <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10 w-1/3">Office Name</th>
-                      <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10">Local</th>
-                      <th className="px-6 py-5 text-[11px] font-bold text-gray-400 uppercase tracking-wider border-b border-white/10">Email</th>
+                    <tr className="bg-gray-100 dark:bg-white/5">
+                      <th className="px-6 py-5 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-white/10 w-1/4">Head / Chief</th>
+                      <th className="px-6 py-5 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-white/10 w-1/3">Office Name</th>
+                      <th className="px-6 py-5 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-white/10">Local</th>
+                      <th className="px-6 py-5 text-[11px] font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider border-b border-gray-200 dark:border-white/10">Email</th>
                     </tr>
                   </thead>
-                  <tbody className="divide-y divide-white/5">
+                  <tbody className="divide-y divide-gray-100 dark:divide-white/5">
                     {directory.data.map((person, idx) => (
-                      <tr key={idx} className="hover:bg-white/[0.03] transition-colors">
+                      <tr key={idx} className="hover:bg-gray-100 dark:hover:bg-white/[0.03] transition-colors">
                         <td className="px-6 py-4">
-                          <p className="font-bold text-[13px] text-gray-100 uppercase">{person.name}</p>
-                          <p className="text-[11px] text-gray-500 mt-0.5">{person.role}</p>
+                          <p className="font-bold text-[13px] text-gray-800 dark:text-gray-100 uppercase">{person.name}</p>
+                          <p className="text-[11px] text-gray-400 mt-0.5">{person.role}</p>
                         </td>
-                        <td className="px-6 py-4 text-[13px] text-gray-300 font-medium pr-8">{person.office}</td>
-                        <td className="px-6 py-4 text-[13px] text-gray-300">{person.local}</td>
+                        <td className="px-6 py-4 text-[13px] text-gray-600 dark:text-gray-300 font-medium pr-8">{person.office}</td>
+                        <td className="px-6 py-4 text-[13px] text-gray-600 dark:text-gray-300">{person.local}</td>
                         <td className="px-6 py-4 text-[13px] text-gray-400">
-                          <a href={`mailto:${person.email}`} className="hover:text-ph-yellow transition-colors">{person.email}</a>
+                          <a href={`mailto:${person.email}`} className="hover:text-ph-blue dark:hover:text-ph-yellow transition-colors">
+                            {person.email}
+                          </a>
                         </td>
                       </tr>
                     ))}
@@ -172,7 +182,6 @@ const Contact = () => {
             </div>
           ))}
         </div>
-
       </div>
     </div>
   );
