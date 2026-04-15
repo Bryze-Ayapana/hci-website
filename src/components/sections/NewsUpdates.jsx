@@ -103,19 +103,27 @@ const NewsUpdates = () => {
 
        
 
-{/* Header Title */}
-        <div className="mb-8">
-          <h2 className="text-3xl md:text-5xl font-black tracking-tight flex items-end gap-2 md:gap-3 uppercase drop-shadow-sm">
-            {/* PSC - Yellow/Gold Gradient */}
-            <span className="bg-gradient-to-r from-ph-yellow to-yellow-500 dark:from-[#fbd11e] dark:to-[#fdff8d] bg-clip-text text-transparent">
+{/* Header Title & Description */}
+        <div className="mb-12 flex flex-col items-center text-center">
+          {/* MASSIVE SIZE: Pushed past 9xl using arbitrary values. REDUCED GAP: Brought words much closer together */}
+          <h2 className="text-7xl md:text-[100px] lg:text-[130px] leading-none tracking-tight flex items-center justify-center gap-2 uppercase drop-shadow-lg">
+            
+            {/* PSC */}
+            <span className="font-semibold bg-gradient-to-r from-ph-yellow to-yellow-500 dark:from-[#fbd11e] dark:to-[#fdff8d] bg-clip-text text-transparent">
               PSC
             </span>
             
-            {/* TODAY - Blue/Cyan Gradient */}
-            <span className="bg-gradient-to-r from-ph-blue to-blue-700 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
+            {/* TODAY */}
+            <span className="font-semibold bg-gradient-to-r from-ph-blue to-blue-700 dark:from-cyan-400 dark:to-blue-500 bg-clip-text text-transparent">
               TODAY
             </span>
+            
           </h2>
+          
+          {/* Section Introduction */}
+          <p className="mt-4 text-xs md:text-sm text-gray-500 dark:text-gray-400 max-w-xl font-normal tracking-wide leading-relaxed">
+            Stay up to date with the latest news, events, and milestones. Discover the stories, updates, and triumphs shaping the journey of every Filipino athlete.
+          </p>
         </div>
 
 
@@ -146,43 +154,35 @@ const NewsUpdates = () => {
            
 
             {/* ── 1. UPPER CAROUSEL (FEATURED BANNER) ── */}
-
-            <div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg group">
-
+            {/* Kept your shadow-lg, but added a subtle border for extra definition in light mode */}
+            <div className="relative w-full h-[300px] md:h-[400px] rounded-xl overflow-hidden shadow-lg border border-gray-200 dark:border-transparent group">
+              
               {/* Image */}
-
               <img
-
                 src={upperBanners[upperIndex].src}
-
                 alt={upperBanners[upperIndex].alt}
-
                 className="w-full h-full object-cover transition-opacity duration-500"
-
               />
-
-             
+              
+              {/* NEW: Gradient overlay specifically to protect the dots from white backgrounds */}
+              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
 
               {/* Optional: Add manual controls to the upper banner if you want them */}
-
-              <div className="absolute bottom-4 right-4 flex gap-2">
-
+              <div className="absolute bottom-4 right-4 flex gap-2 z-10">
                 {upperBanners.map((_, idx) => (
-
                   <button
-
                     key={idx}
-
                     onClick={() => setUpperIndex(idx)}
-
-                    className={`w-2.5 h-2.5 rounded-full transition-all ${upperIndex === idx ? 'bg-white w-6' : 'bg-white/50 hover:bg-white/80'}`}
-
+                    // Added drop-shadow-md so the dots cast their own shadow, plus changed hover states for better visibility
+                    className={`h-2.5 rounded-full transition-all duration-300 drop-shadow-md ${
+                      upperIndex === idx 
+                        ? 'bg-white w-8' 
+                        : 'bg-white/60 hover:bg-white w-2.5'
+                    }`}
+                    aria-label={`Go to slide ${idx + 1}`}
                   />
-
                 ))}
-
               </div>
-
             </div>
 
 

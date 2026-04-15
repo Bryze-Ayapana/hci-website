@@ -2,13 +2,19 @@ import React from 'react';
 
 const Footer = () => {
   return (
-    // Light mode: white, Dark mode: your deep blue
-    <footer className="bg-white dark:bg-[#050D1E] border-t border-gray-200 dark:border-white/10 text-gray-900 dark:text-white pt-16 pb-8 font-poppins mt-20">
-      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16">
+    // Changed bg-white to bg-gray-50 for a slightly darker off-white.
+    // Removed the border-t class from this main container.
+    <footer className="bg-gray-50 dark:bg-[#050D1E] text-gray-900 dark:text-white pt-0 pb-8 font-poppins mt-20 relative">
+      
+      {/* NEW: The gradient border matching the header */}
+      <div className="h-[2px] bg-gradient-to-r from-ph-blue via-ph-red to-ph-yellow w-full absolute top-0 left-0"></div>
+
+      {/* Added pt-16 here to compensate for the top padding moved from the footer tag */}
+      <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 pt-16">
         
         {/* 4-Column Grid Layout */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-12 mb-16">
-         
+          
           {/* Column 1: Logo */}
           <div className="flex justify-center lg:justify-start items-start">
             <img 

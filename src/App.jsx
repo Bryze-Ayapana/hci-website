@@ -9,36 +9,32 @@ import SplashScreen from './components/common/SplashScreen';
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
 import CustomCursor from './components/common/CustomCursor';
+// 1. IMPORT YOUR NEW COMPONENT HERE
+import ScrollToTop from './components/common/ScrollToTop'; 
 import Procurement from './pages/Procurement';
 import Contact from './pages/Contact';
 import Transparency from './pages/Transparency';
+import Podium from './pages/Podium';
 
 function App() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    AOS.init({
-      duration: 800,
-      once: true,
-      offset: 100,
-    });
+    AOS.init({ duration: 800, once: true, offset: 100 });
   }, []);
 
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2500);
+    const timer = setTimeout(() => setIsLoading(false), 2500);
     return () => clearTimeout(timer);
   }, []);
 
   return (
     <Router>
+      {/* 2. PLACE IT HERE: Right inside the Router, above everything else */}
+      <ScrollToTop /> 
       <CustomCursor />
-      {/* CHANGE: Changed bg-white/dark:bg-gray-900 to bg-transparent.
-          This allows the glowing radial gradients in your index.css to show through.
-      */}
+      
       <div className="min-h-screen w-full bg-transparent transition-colors duration-300">
-        
         <AnimatePresence>
           {isLoading && <SplashScreen />}
         </AnimatePresence>
@@ -47,15 +43,13 @@ function App() {
           <div className="flex flex-col min-h-screen">
             <Navbar />
             
-            {/* The zoom property in index.css will now handle the scaling 
-                of this entire content block, including the Navbar.
-            */}
             <main className="flex-grow">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/about/procurement" element={<Procurement />} />
                 <Route path="/contact-us" element={<Contact />} />
                 <Route path="/transparency" element={<Transparency />} />
+                <Route path="/the-podium" element={<Podium />} />
               </Routes>
             </main>
 

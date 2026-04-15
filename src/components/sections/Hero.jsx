@@ -33,7 +33,7 @@ const Hero = () => {
   }, [cyclingWords.length]);
 
   return (
-    <section className="relative h-screen w-full overflow-hidden bg-white dark:bg-[#030A17] pt-32 transition-colors duration-300"> 
+    <section className="relative h-[112vh] w-full overflow-hidden bg-white dark:bg-[#030A17] pt-32 transition-colors duration-300"> 
       <div className="absolute inset-0 z-0">
         <AnimatePresence initial={false}>
           <motion.img
@@ -52,10 +52,11 @@ const Hero = () => {
       {/* ── LIGHT AND DARK MODE LOCALIZED OVERLAYS ── */}
       
       {/* Left side overlay: ~800px width, white gradient to transparent (light mode only) */}
-      <div className="absolute left-0 top-0 h-full w-[500px] bg-gradient-to-r from-white/50 dark:from-[#030A17]/50 via-white/20 dark:via-[#030A17]/20 to-transparent z-10 pointer-events-none transition-colors duration-300" />
+      <div className="absolute left100 top-0 h-full w-[0px] bg-gradient-to-r from-white/2
+      0 dark:from-[#030A17]/50 via-white/10 dark:via-[#030A17]/20 to-transparent z-10 pointer-events-none transition-colors duration-300" />
       
       {/* Bottom overlay: ~166px height, white gradient to transparent (light mode only) */}
-      <div className="absolute bottom-0 left-0 w-full h-[166px] bg-gradient-to-t from-white/20 dark:from-[#030A17]/70 via-white/30 dark:via-[#030A17]/40 to-transparent z-10 pointer-events-none transition-colors duration-300" />
+      <div className="absolute bottom-0 left-0 w-full h-[100px] bg-gradient-to-t from-white/-90 dark:from-[#030A17]/70 via-white/30 dark:via-[#030A17]/40 to-transparent z-10 pointer-events-none transition-colors duration-300" />
 
       {/* Hero Text Content */}
       <div className="relative h-full w-full z-20 px-4 md:px-20 lg:px-32 flex flex-col items-start justify-end pb-24">
@@ -96,7 +97,7 @@ const Hero = () => {
       </div>
 
       {/* Smooth blend gradient to next section */}
-      <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-b from-transparent via-white/20 dark:via-gray-900/50 to-gray-50 dark:to-gray-900 z-20 pointer-events-none transition-colors duration-300" />
+      <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-b from-transparent via-white/20 dark:via-gray-900/50 to-gray-50 dark:to-gray-900 z-20 pointer-events-none transition-colors duration-300" />
     </section>
   );
 };
